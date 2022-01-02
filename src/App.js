@@ -1,25 +1,64 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Accordion from "./component/Accordion";
+import Dropdown from "./component/DropDown";
+import Header from "./component/Header";
+import Search from "./component/Search";
+import Translate from "./component/Translate";
+import Route from "./component/Route"
 
-function App() {
+
+const items = [
+    {
+        title:'what is react? 1',
+        content:'react is framework 1'
+    },{
+        title:'what is react? 2',
+        content:'react is framework 2'
+
+    },{
+        title:'what is react? 3',
+        content:'react is framework 3'
+
+    }
+]
+
+const options = [
+    {
+        label:'color red',
+        value:'red'
+    },
+    {
+        label:'color green',
+        value:'green'
+    },
+    {
+        label:'color yellow',
+        value:'yellow'
+    }
+]
+export default () =>{
+    const [selected, setSelected] = useState(options[0]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      <Route path="/">
+        <Accordion items={items} />
+      </Route>
+      <Route path="/list">
+        <Search />
+      </Route>
+      <Route path="/dropdown">
+        <Dropdown
+          label="Select a color"
+          options={options}
+          selected={selected}
+          onSelectedChange={setSelected}
+        />
+      </Route>
+      <Route path="/translate">
+        <Translate />
+      </Route>
     </div>
   );
 }
-
-export default App;
